@@ -89,21 +89,14 @@ WSGI_APPLICATION = 'Portfolio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'myproject',
-#         'USER': 'myprojectuser',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': 'portfolio',
+         'USER': os.environ['DB_USER'],
+         'PASSWORD': os.environ['DB_KEY'],
+         'HOST': 'localhost',
+         'PORT': '',
+     }
+ }
 
 
 # Password validation
