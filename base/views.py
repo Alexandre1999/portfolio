@@ -16,11 +16,11 @@ from .models import Project, Bio
 
 def home_view(request):
     projects = Project.objects.filter(active=True, featured=True).order_by('-date')[0:3]
-    # bio = get_object_or_404(Bio, id=1)
+    bio = get_object_or_404(Bio, id=1)
 
     context = {
         'projects': projects,
-        'bio': "to replace with bio"
+        'bio': bio
     }
     return render(request, 'home.html', context)
 
