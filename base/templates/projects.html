@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row mb-5">
+        <div class="col-lg-6 section-title">
+            <span class="sub-title mb-2 d-block">PAST PROJECTS</span>
+            <blockquote class="blockquote">
+                <h2 class="title text-primary">“Practice does not make perfect. Only perfect practice makes perfect.”</h2>
+                <footer class="blockquote-footer">Vince Lombardi</footer>
+            </blockquote>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 ml-auto">
+            <div class="row">
+                {% for project in projects %}
+                    <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                        <div class="service h-100">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.projectResume }}</p>
+                            <p><a href="{% url 'base:project_detail' project.slug %}" class="readmore">Learn more</a></p>
+                            {% if request.user.is_authenticated %}
+                                | <a href="{% url 'base:update_project' project.slug %}">Edit</a>
+                                | <a href="{% url 'base:delete_project' project.slug %}">Delete</a>
+                            {% endif %}
+                            <hr>
+                            {% for tag in project.tags.all %}
+                                <span class="tag">{{tag}}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <h3>No posts found...</h3>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% if projects.has_other_pages %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            
+                            {% if projects.has_previous %}
+                                <li class="page-item"><a href="?page={{ projects.previous_page_number }}" class="text-primary page-link">&laquo</a></li>
+
+                                <li class="page-item"><a href="?page=1" class="text-primary page-link">First</a></li>
+                            {% endif %}
+                        
+                        
+                            {% for i in projects.paginator.page_range %}
+                                {% if projects.number == i %}
+                                    <li class="page-item"><a class="active page-link">{{ i }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="text-primary page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if projects.has_next %}
+                                <li class="page-item"><a href="?page={{ projects.paginator.num_pages }}" class="text-primary page-link">Last</a></li>
+
+                                <li class="page-item"><a href="?page={{ projects.next_page_number }}" class="text-primary page-link">&raquo</a></li>
+                            {% endif %}
+
+
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

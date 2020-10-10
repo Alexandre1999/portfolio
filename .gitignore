@@ -1,0 +1,7 @@
+# IDE Data
+/.idea/
+
+# virtual env
+/venv/
+
+

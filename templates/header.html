@@ -1,0 +1,23 @@
+{% load static %}
+
+<header>
+    <div class="nav-wrapper">
+
+        <!-- Link around dots-wrapper added after tutorial video -->
+        <a href="{% url 'base:home' %}">
+            <div class="header-wrapper">
+                <img class="header-logo" src="{% static 'images/logo.png' %}" alt="">
+            </div>
+        </a>
+
+
+        <ul id="navigation">
+            <li><a href="{% url 'base:home' %}#contact">Contact</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'base:create_project' %}">Add Project</a></li>
+                <li><a href="{% url 'base:update_bio' %}">Update Bio</a></li>
+                <li><a href="{% url 'base:logout' %}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
