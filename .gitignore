@@ -1,7 +1,10 @@
 # IDE Data
 /.idea/
+.DS_STORE
 
 # virtual env
 /venv/
 
+# env
+.env
 
