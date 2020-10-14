@@ -12,6 +12,7 @@
 
 
         <ul id="navigation">
+        <li><a href="https://keebcode.com/" target="_blank">Blog</a></li>
             <li><a href="{% url 'base:home' %}#contact">Contact</a></li>
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'base:create_project' %}">Add Project</a></li>
