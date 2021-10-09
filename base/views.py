@@ -26,7 +26,10 @@ def home_view(request):
 
 
 def projects_view(request):
-    projects = Project.objects.filter(active=True).order_by('-date')
+    if request.user.is_authenticated:
+        projects = Project.objects.order_by('-date')
+    else:
+        projects = Project.objects.filter(active=True).order_by('-date')
 
     page = request.GET.get('page')
     paginator = Paginator(projects, 6)
