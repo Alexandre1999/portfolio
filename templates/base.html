@@ -1,9 +1,9 @@
 {% load static %}
-{% load i18n static %}
+{% load i18n %}
 
 <!DOCTYPE html>
     {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-    <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+    <html lang="{{ LANGUAGE_CODE|default:"en" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
     <head>
         <meta charset="utf-8">
         {% block head %}{% endblock %}
@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
-        <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" />
-        <meta name="msapplication-config" content="{% static 'favicon/browserconfig.xml' %}" />
+        <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
+        <meta name="msapplication-config" content="{% static 'favicon/browserconfig.xml' %}">
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
@@ -30,7 +30,7 @@
     <body>
         {% include 'header.html' %}
         <!-- Container -->
-        <main>
+        <main prefix="schema: http://schema.org/">
             <div id="container">
                 <!-- Header -->
                 {% block header %}{% endblock %}

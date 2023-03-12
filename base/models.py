@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
-
 # Create your models here.
 from django.urls import reverse
 
@@ -67,4 +66,6 @@ class Bio(models.Model):
     resume = models.FileField(null=True, blank=True, upload_to="media")
     softSkill = models.ManyToManyField(SoftSkill, null=True, blank=True)
     skill = models.ManyToManyField(Skill, null=True, blank=True)
+
+
 

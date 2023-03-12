@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Ivan Raymond{% endblock %}
+{% block title %}Ivan Raymond{% endblock title %}
 
 {% block content %}
 
-    <section>
+    <section typeof="schema:Person">
         <div class="a-container">
             <div class="row contained">
                 <div class="col-4 offset-1">
-                    <img style="width: 25vw;" src="{% static 'images/me.png' %}" alt="Picture of Ivan Raymond">
+                    <img style="width: 25vw;" src="{% static 'images/me.png' %}" alt="Picture of Ivan Raymond" property="schema:image">
                 </div>
                 <div class="col align-self-center">
-                    <h2 id="title-name" class="title-name">I'm Ivan Raymond</h2>
+                    <h2 id="title-name" class="title-name" property="schema:name">{% trans "I'm Ivan Raymond" %}</h2>
                 </div>
             </div>
         </div>
@@ -20,20 +21,19 @@
 	</section>
 
 
-
-	<section>
+	<section typeof="schema:CreativeWork">
         <div class="container">
             <div class="section-title text-center mb-5">
-                <span class="sub-title mb-2 d-block">ABOUT ME</span>
-                <h2 class="title text-primary">But who is Ivan ?</h2>
+                <span class="sub-title mb-2 d-block">{% trans "ABOUT ME" %}</span>
+                <h2 class="title text-primary">{% trans "But who is Ivan ?" %}</h2>
             </div>
-            <div>
+            <div property="schema:description">
                 {{ bio.body | safe }}
             </div>
             <div class="button-container">
                 {% if bio.resume %}
                     <a class="resume" href="{{ bio.resume.url }}" download="{{ bio.resume.url }}">
-                        <button class="btn btn-teal text">Resume 📄</button>
+                        <button class="btn btn-teal text">{% trans "Resume 📄" %}</button>
                     </a>
                 {% endif %}
             </div>
@@ -43,73 +43,77 @@
 
 
 
-    <section class="syntax-highlighting">
+    <section class="syntax-highlighting" typeof="schema:CreativeWork">
         <br>
         <div class="container">
             <div class="section-title text-center mb-5">
-                <span class="sub-title text mb-2 d-block">COMPETENCIES</span>
-                <blockquote class="blockquote">
-                    <h2 class="title text">“The interaction of knowledge and skills with experience is key to learning“</h2>
-                    <footer class="blockquote-footer">John Dewey</footer>
+                <span class="sub-title text mb-2 d-block">{% trans "COMPETENCIES" %}</span>
+                <blockquote class="blockquote" typeof="schema:Quotation">
+                    <h2 class="title text" property="schema:text">{% trans "“The interaction of knowledge and skills with experience is key to learning“" %}</h2>
+                    <footer class="blockquote-footer">
+                        <span property="schema:author" typeof="schema:Person"><span property="schema:name">John Dewey</span></span>
+                    </footer>
                 </blockquote>
             </div>
             <br>
-            <span class="text">Soft_Skills </span><span class="operator">=</span><span class="text"> [</span>
+            <span class="text">{% trans "Soft_Skills" %} </span><span class="operator">=</span><span class="text"> [</span>
             <br><br>
             {% for softSkill in bio.softSkill.all %}
             <p style="margin-left:40px" class="value">"{{ softSkill }}",</p>
             {% endfor %}
             <p class="text">]</p>
 
-            <span class="text">Skills </span><span class="operator">=</span><span class="text"> [</span>
+            <span class="text">{% trans "Skills" %} </span><span class="operator">=</span><span class="text"> [</span>
             <br><br>
             {% for skill in bio.skill.all %}
             <p style="margin-left:40px" class="value">"{{ skill }}",</p>
             {% endfor %}
             <p class="text">]</p>
 
-            <span class="identifier font-italic">class</span><span class="class"> Acquired</span><span class="text">:</span>
+            <span class="identifier font-italic">class</span><span class="class"> {% trans "Acquired" %}</span><span class="text">:</span>
             <br><br>
             <span style="margin-left:40px" class="identifier font-italic">def</span>
             <span class="identifier font-italic">&nbsp;__init__</span>
             <span class="text">(</span>
             <span class="parameter">self</span>
             <span class="text">, </span>
-            <span class="parameter">Skills</span>
+            <span class="parameter">{% trans "Skills" %}</span>
             <span class="text">, </span>
-            <span class="parameter">Soft_Skills</span>
+            <span class="parameter">{% trans "Soft_Skills" %}</span>
             <span class="text">):</span>
             <br>
             <span style="margin-left:80px" class="parameter">self</span>
-            <span class="text">.Skills</span>
+            <span class="text">.{% trans "Skills" %}</span>
             <span class="operator"> = </span>
-            <span class="text">Skills</span>
+            <span class="text">{% trans "Skills" %}</span>
             <br>
             <span style="margin-left:80px" class="parameter">self</span>
-            <span class="text">.Soft_Skills</span>
+            <span class="text">.{% trans "Soft_Skills" %}</span>
             <span class="operator"> = </span>
-            <span class="text">Soft_Skills</span>
+            <span class="text">{% trans "Soft_Skills" %}</span>
             <br><br>
-            <span class="text">I</span>
+            <span class="text">{% trans "I" %}</span>
             <span class="operator"> = </span>
-            <span class="identifier">Acquired</span>
-            <span class="text">(Skills, Soft_Skills)</span>
+            <span class="identifier">{% trans "Acquired" %}</span>
+            <span class="text">({% trans "Skills" %}, {% trans "Soft_Skills" %})</span>
         </div>
         <br><br>
 	</section>
 
 
 
-	<section class="s1">
+	<section class="s1" typeof="schema:CreativeWork">
         <br>
         <div class="container">
 
             <div class="row mb-5">
                 <div class="col-lg-6 section-title">
-                    <span class="sub-title mb-2 d-block">FEATURED PROJECTS</span>
-                    <blockquote class="blockquote">
-                    <h2 class="title text-primary">“Practice does not make perfect. Only perfect practice makes perfect.”</h2>
-                    <footer class="blockquote-footer">Vince Lombardi</footer>
+                    <span class="sub-title mb-2 d-block">{% trans "FEATURED PROJECTS" %}</span>
+                    <blockquote class="blockquote" typeof="schema:Quotation">
+                        <h2 class="title text-primary" property="schema:text">{% trans "“Practice does not make perfect. Only perfect practice makes perfect.”" %}</h2>
+                        <footer class="blockquote-footer">
+                            <span property="schema:author" typeof="schema:Person"><span property="schema:name">Vince Lombardi</span></span>
+                        </footer>
                     </blockquote>
                 </div>
             </div>
@@ -117,19 +121,19 @@
                 <div class="col-lg-10 ml-auto">
                     <div class="row">
                         {% for project in projects %}
-                            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" typeof="schema:SoftwareApplication" about="{% url 'base:project_detail' project.slug %}">
                                 <div class="service h-100">
-                                    <h3>{{ project.title }}</h3>
-                                    <p>{{ project.projectResume }}</p>
-                                    <p><a href="{% url 'base:project_detail' project.slug %}" class="readmore">Learn more</a></p>
+                                    <h3 property="schema:name">{{ project.title }}</h3>
+                                    <p property="schema:description">{{ project.projectResume }}</p>
+                                    <p><a href="{% url 'base:project_detail' project.slug %}" property="schema:url" class="readmore">{% trans "Learn more" %}</a></p>
 
                                     {% if request.user.is_authenticated %}
-                                        | <a href="{% url 'base:update_project' project.slug %}">Edit</a>
-                                        | <a href="{% url 'base:delete_project' project.slug %}">Delete</a>
+                                        | <a href="{% url 'base:update_project' project.slug %}" property="schema:update">{% trans "Edit" %}</a>
+                                        | <a href="{% url 'base:delete_project' project.slug %}" property="schema:delete">{% trans "Delete" %}</a>
                                     {% endif %}
                                     <hr>
                                     {% for tag in project.tags.all %}
-						                <span class="tag">{{tag}}</span>
+						                <span property="schema:keywords" content="{{tag}}" class="tag">{{tag}}</span>
 					                {% endfor %}
                                 </div>
                             </div>
@@ -139,8 +143,8 @@
             </div>
         </div>
 
-        <p align="center">
-            <a href="{% url 'base:projects' %}">View More</a>
+        <p class="centered-text">
+            <a href="{% url 'base:projects' %}">{% trans "View More" %}</a>
         </p>
         <hr>
 	</section>
@@ -149,38 +153,40 @@
         <br>
         <div class="links-container">
             <div class="section-title text-center mb-5">
-                <span class="sub-title mb-2 d-block">LINKS</span>
-                <blockquote class="blockquote">
-                    <h2 class="title text-primary">“You are what you share.”</h2>
-                    <footer class="blockquote-footer">Charles Leadbeater</footer>
+                <span class="sub-title mb-2 d-block">{% trans "LINKS" %}</span>
+                <blockquote class="blockquote" typeof="schema:Quotation">
+                    <h2 class="title text-primary" property="schema:text">{% trans "“You are what you share.”" %}</h2>
+                    <footer class="blockquote-footer">
+                        <span property="schema:author" typeof="schema:Person"><span property="schema:name">Charles Leadbeater</span></span>
+                    </footer>
                 </blockquote>
             </div>
             <br>
-            <div class="row">
+            <div class="row" typeof="schema:WebPage">
                 <div class="col-lg-12 ml-auto">
                     <div class="row">
-                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3">
+                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3" typeof="schema:Person schema:Organization" about="https://www.linkedin.com/in/ivanraymond">
                             <div class="h-100">
-                                <h3>LinkedIn</h3>
-                                <p><a target="_blank" href="https://www.linkedin.com/in/ivanraymond" class="readmore">Connect</a></p>
+                                <h3 property="schema:name">LinkedIn</h3>
+                                <p><a target="_blank" href="https://www.linkedin.com/in/ivanraymond" class="readmore" property="schema:url">{% trans "Connect" %}</a></p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3">
+                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3" typeof="schema:Person schema:Organization" about="https://twitter.com/AlexandreRaym">
                             <div class="h-100">
-                                <h3>Twitter</h3>
-                                <p><a target="_blank" href="https://twitter.com/AlexandreRaym" class="readmore">Follow</a></p>
+                                <h3 property="schema:name">Twitter</h3>
+                                <p><a target="_blank" href="https://twitter.com/AlexandreRaym" class="readmore" property="schema:url">{% trans "Follow" %}</a></p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3">
+                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3" typeof="schema:Person schema:Organization" about="https://github.com/Alexandre1999">
                             <div class="h-100">
-                                <h3>Github</h3>
-                                <p><a target="_blank" href="https://github.com/Alexandre1999" class="readmore">Follow</a></p>
+                                <h3 property="schema:name">Github</h3>
+                                <p><a target="_blank" href="https://github.com/Alexandre1999" class="readmore" property="schema:url">{% trans "Follow" %}</a></p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3">
+                        <div class="col-md-6 col-lg-3 mb-3 mb-lg-3" typeof="schema:Blog" about="https://164.90.238.204">
                             <div class="h-100">
-                                <h3>Keeb&Code Blog</h3>
-                                <p><a target="_blank" href="https://164.90.238.204" class="readmore">Read</a></p>
+                                <h3 property="schema:name">Keeb&amp;Code Blog</h3>
+                                <p><a target="_blank" href="https://164.90.238.204" class="readmore" property="schema:url">{% trans "Read" %}</a></p>
                             </div>
                         </div>
                     </div>
@@ -191,81 +197,83 @@
     </section>
     <hr>
 
-    <section class="s2">
+    <section class="s2" typeof="schema:ContactPage">
         <br>
-		<div class="main-container">
-			<div class="section-title text-center mb-5">
-                <span class="sub-title mb-2 d-block">GET IN TOUCH</span>
-                <h2 class="title text-primary">Contact Me</h2>
+        <div class="main-container">
+            <div class="section-title text-center mb-5">
+                <span class="sub-title mb-2 d-block">{% trans "GET IN TOUCH" %}</span>
+                <h2 class="title text-primary">{% trans "Form" %}</h2>
             </div>
             <br>
 
-			<form id="contact-form" method="POST" action="{% url 'base:send_email' %}">
-				{% csrf_token %}
-				<a name="contact"></a>
+            <form id="contact-form" method="POST" action="{% url 'base:send_email' %}" typeof="schema:ContactForm">
+                {% csrf_token %}
 
-				<label>Name</label>
-				<input required class="input-field" type="text" name="name">
+                <label property="schema:name">{% trans "Name" %}</label>
+                <input required class="input-field" type="text" name="name" property="schema:givenName">
 
-				<label>Subject</label>
-				<input required class="input-field" type="text" name="subject">
+                <label property="schema:about">{% trans "Subject" %}</label>
+                <input required class="input-field" type="text" name="subject" property="schema:subjectOf">
 
-				<label>Email</label>
-				<input required class="input-field" type="email" name="email">
+                <label property="schema:email">{% trans "Email" %}</label>
+                <input required class="input-field" type="email" name="email" property="schema:email">
 
-				<label>Message</label>
-				<textarea required class="input-field" name="message"></textarea>
+                <label property="schema:text">{% trans "Message" %}</label>
+                <textarea required class="input-field" name="message" property="schema:text"></textarea>
 
-                <button class="submit-btn btn btn-teal center" type="submit" value="Send">Send</button>
-			</form>
+                <button class="submit-btn btn btn-teal center" type="submit" value="Send">{% trans "Send" %}</button>
+            </form>
 
-		</div>
-	</section>
+        </div>
+    </section>
 
 
 {% endblock content %}
 
+
 {% block script %}
-    <script>
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE == "en" %}
+        <script>
+            var done = false;
+            var typed;
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 6 && done === false) {
 
-        var done = false;
-        var typed;
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 6 && done === false) {
+                    done = true;
+                    var text = document.querySelector(".title-name");
+                    $(".title-name").fadeOut("slow", function () {});
+                    text.innerHTML="";
+                    text.classList.add("typed");
+                    $(".title-name").fadeIn("slow", function () {});
+                    type();
+                }
 
-                done = true;
-                var text = document.querySelector(".title-name");
-                $(".title-name").fadeOut("slow", function () {});
-                text.innerHTML="";
-                text.classList.add("typed");
-                $(".title-name").fadeIn("slow", function () {});
-                type();
+                if ($(this).scrollTop() < 6 && done === true) {
+
+                    done = false;
+                    var text = document.querySelector(".title-name");
+                    $(".title-name").fadeOut("slow", function () {});
+                    typed.destroy();
+                    text.innerHTML="I'm Ivan Raymond";
+                    $(".title-name").fadeIn("slow", function () {});
+                }
+            });
+
+            function type() {
+                var options = {
+                    strings: ['I\'m an Innovator ^300', 'I\'m a Dreamer ^300', 'I\'m an Engineer ^300'],
+                    typeSpeed: 125,
+                    backSpeed: 80,
+                    loop: true,
+                    loopCount: Infinity,
+                    showCursor: false,
+                    smartBackspace: true,
+
+                };
+                typed = new Typed('.typed', options);
             }
-
-            if ($(this).scrollTop() < 6 && done === true) {
-
-                done = false;
-                var text = document.querySelector(".title-name");
-                $(".title-name").fadeOut("slow", function () {});
-                typed.destroy();
-                text.innerHTML="I'm Ivan Raymond";
-                $(".title-name").fadeIn("slow", function () {});
-            }
-        });
-
-        function type() {
-            var options = {
-                strings: ['I\'m an Innovator ^300', 'I\'m a Dreamer ^300', 'I\'m a Developer ^300'],
-                typeSpeed: 125,
-                backSpeed: 80,
-                loop: true,
-                loopCount: Infinity,
-                showCursor: false,
-                smartBackspace: true,
-
-            };
-            typed = new Typed('.typed', options);
-        }
-    </script>
+        </script>
+    {% endif %}
 
 {% endblock script %}

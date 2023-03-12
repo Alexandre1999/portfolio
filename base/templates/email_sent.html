@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
 <style type="text/css">
@@ -33,9 +34,9 @@
 
 <div id="page-wrapper">
     <div id="success-box" class="content-block">
-        <h1>Thanks for reaching out!</h1>
-        <p>Your message was succesfully sent.</p>
-        <a id="back-btn" href="{% url 'base:home' %}">Home Page</a>
+        <h1>{% trans "Thanks for reaching out!" %}</h1>
+        <p>{% trans "Your message was succesfully sent." %}</p>
+        <a id="back-btn" href="{% url 'base:home' %}">{% trans "Home Page" %}</a>
     </div>
 </div>
 {% endblock content %}

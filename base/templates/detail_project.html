@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}I.R - {{ project.title }}{% endblock title %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" vocab="http://schema.org/" typeof="SoftwareApplication">
         <br>
         <div class="row justify-content-end align-items-center">
             <span class="col-2">
-                <a href="{% url 'base:projects' %}"><button class="btn text btn-teal" >Back</button></a>
+                <a href="{% url 'base:projects' %}" class="btn text btn-teal">{% trans "Back" %}</a>
             </span>
-            <span class="col offset-1">
-                <h4 class="title text-primary">{{ project.title }}</h4>
-            </span>
+            <div class="col offset-1">
+              <h4 class="title text-primary" property="name">{{ project.title }}</h4>
+            </div>
         </div>
         <br>
-        <div class="body-wrapper">
+        <div class="body-wrapper" property="description">
             {{ project.body | safe }}
             <br><br><br><br><br>
         </div>
