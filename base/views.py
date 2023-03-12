@@ -136,7 +136,7 @@ def send_email_view(request):
             ['ivanraymond99@gmail.com']
         )
 
-        email.fail_silently = False
+        email.fail_silently = True
         email.send()
 
     return render(request, 'email_sent.html')
